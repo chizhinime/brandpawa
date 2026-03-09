@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About BrandPawa - Our Story & Mission</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Copy navigation and footer styles from previous pages */
+        :root {
+            --primary: #a300f9;
+            --background: #1B1E35;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Avenir', sans-serif;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Navigation */
+        .navbar {
+            background-color: var(--background);
+            padding: 1rem 0;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo a {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--white);
+            text-decoration: none;
+        }
+        .logo span {
+            color: var(--primary);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            color: var(--white);
+            text-decoration: none;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.85rem 2rem;
+            border-radius: 40px;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* About Hero */
+        .about-hero {
+            background: linear-gradient(135deg, var(--background) 0%, #0f1222 100%);
+            color: white;
+            padding: 5rem 0;
+            text-align: center;
+        }
+
+        .about-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .about-hero p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        /* Mission Section */
+        .mission {
+            padding: 5rem 0;
+            background: white;
+        }
+
+        .mission-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .mission-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        .mission-content p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 2rem;
+        }
+
+        .mission-quote {
+            font-style: italic;
+            font-size: 1.3rem;
+            border-left: 4px solid var(--primary);
+            padding-left: 2rem;
+            margin: 2rem 0;
+        }
+
+        .mission-image {
+            background: var(--primary);
+            height: 400px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 5rem;
+        }
+
+        /* Values */
+        .values {
+            padding: 5rem 0;
+            background: #f5f5f7;
+        }
+
+        .values h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .value-card {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .value-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: white;
+            font-size: 2rem;
+        }
+
+        footer {
+            background: var(--background);
+            color: white;
+            padding: 4rem 0 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .mission-grid, .values-grid {
+                grid-template-columns: 1fr;
+            }
+            .nav-menu {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container nav-container">
+            <div class="logo">
+                <a href="index.html">Brand<span>Pawa</span></a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="quizzes.html">Quizzes</a></li>
+                <li><a href="challenges.html">Challenges</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="auth.html" class="btn btn-primary">Login</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="about-hero">
+        <div class="container">
+            <h1>Democratizing Brand Growth</h1>
+            <p>We're on a mission to give every visionary the tools to change the world</p>
+        </div>
+    </section>
+
+    <section class="mission">
+        <div class="container">
+            <div class="mission-grid">
+                <div class="mission-content">
+                    <h2>Our Story</h2>
+                    <p>BrandPawa was born from a simple observation: too many great ideas never reach their potential because their creators lack the tools and systems to build a powerful brand.</p>
+                    
+                    <div class="mission-quote">
+                        "The reason we're building BrandPawa is to give everyone with vision the tools they need to change the world easily and faster."
+                        <div style="margin-top: 1rem; font-style: normal;">— Dunamis Shiloh Okonwor, Founder</div>
+                    </div>
+                    
+                    <p>We believe that brand strategy shouldn't be reserved for agencies with big budgets. By combining the science of brand development with accessible technology, we're building the infrastructure for the next generation of African and global brands.</p>
+                </div>
+                <div class="mission-image">
+                    <i class="fas fa-rocket"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="values">
+        <div class="container">
+            <h2>Our Core Values</h2>
+            <div class="values-grid">
+                <div class="value-card">
+                    <div class="value-icon"><i class="fas fa-lightbulb"></i></div>
+                    <h3>Vision First</h3>
+                    <p>We put the visionary's purpose at the center of everything.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon"><i class="fas fa-chart-line"></i></div>
+                    <h3>Data-Driven</h3>
+                    <p>Decisions based on insights, not guesswork.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon"><i class="fas fa-globe-africa"></i></div>
+                    <h3>Built for Africa</h3>
+                    <p>Creating global opportunities from African roots.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div style="text-align: center;">
+                <p style="margin-bottom: 2rem;">Ready to build your brand?</p>
+                <a href="auth.html?signup=true" class="btn btn-primary">Start Your Journey</a>
+            </div>
+            <div class="copyright" style="text-align: center; margin-top: 3rem;">
+                &copy; 2026 BrandPawa. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
