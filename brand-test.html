@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BrandPawa Test - Brand Strength Assessment</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Copy all CSS from color-quiz.html but modify for test */
+        :root {
+            --primary: #a300f9;
+            --primary-dark: #7a00c4;
+            --background: #1B1E35;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Avenir', sans-serif;
+            background: linear-gradient(135deg, var(--background) 0%, #0f1222 100%);
+            min-height: 100vh;
+            color: var(--white);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+
+        .test-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .test-header h1 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .test-header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 10px;
+            margin: 2rem 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--primary);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .question-container {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .question-text {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .options-grid {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .option {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 1.2rem;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .option:hover {
+            background: rgba(163, 0, 249, 0.2);
+            border-color: var(--primary);
+        }
+
+        .option.selected {
+            background: var(--primary);
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1rem;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: white;
+        }
+
+        .result-card {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px;
+            display: none;
+        }
+
+        .result-card.show {
+            display: block;
+        }
+
+        .score-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: conic-gradient(var(--primary) 0deg, #444 0deg);
+            margin: 2rem auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            font-weight: bold;
+            border: 4px solid white;
+        }
+
+        .signup-form {
+            margin-top: 2rem;
+            text-align: left;
+            background: rgba(0,0,0,0.3);
+            padding: 2rem;
+            border-radius: 12px;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.1);
+            color: white;
+            font-size: 1rem;
+        }
+
+        /* Navigation bar styles (copy from index.html) */
+        .navbar {
+            background-color: var(--background);
+            padding: 1rem 0;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 90%;
+        }
+
+        .logo a {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--white);
+            text-decoration: none;
+        }
+        .logo span {
+            color: var(--primary);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            color: var(--white);
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Simple Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <a href="index.html">Brand<span>Pawa</span></a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="test-header">
+            <h1>📊 BrandPawa Test</h1>
+            <p>Measure your brand's strength across 5 key dimensions</p>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+
+        <!-- Quiz Container -->
+        <div id="testContainer">
+            <div class="question-container" id="questionContainer"></div>
+            
+            <div class="navigation-buttons">
+                <button class="btn btn-secondary" id="prevBtn" onclick="prevQuestion()" disabled>Previous</button>
+                <button class="btn" id="nextBtn" onclick="nextQuestion()">Next</button>
+            </div>
+        </div>
+
+        <!-- Results Container -->
+        <div id="resultContainer" class="result-card">
+            <h2>Your Brand Strength Score</h2>
+            <div class="score-circle" id="scoreCircle">0</div>
+            <h3 id="scoreLevel"></h3>
+            <p id="scoreDescription"></p>
+            
+            <!-- Signup Form -->
+            <div class="signup-form">
+                <h3>Get Your Full Report</h3>
+                <p>Enter your details to receive detailed recommendations</p>
+                <form id="signupForm">
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" id="fullName" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Brand Name (Optional)</label>
+                        <input type="text" id="brandName">
+                    </div>
+                    <button type="submit" class="btn" style="width: 100%;" id="saveResultBtn">
+                        Get My Report
+                    </button>
+                </form>
+                <p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.7;">
+                    Already have an account? <a href="auth.html" style="color: var(--primary);">Login</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Test Questions (5 categories)
+        const questions = [
+            {
+                category: "Brand Clarity",
+                text: "How clearly defined is your brand's mission and vision?",
+                options: [
+                    "Not defined at all",
+                    "Vaguely defined in my head",
+                    "Written down but not used",
+                    "Clearly defined and guides decisions",
+                    "Crystal clear and inspires others"
+                ]
+            },
+            {
+                category: "Market Position",
+                text: "How well do you stand out from competitors?",
+                options: [
+                    "I blend in completely",
+                    "Slightly different but not clear",
+                    "Some unique aspects",
+                    "Clearly differentiated",
+                    "In a category of my own"
+                ]
+            },
+            {
+                category: "Audience Connection",
+                text: "How well do you understand your target audience?",
+                options: [
+                    "I'm guessing who they are",
+                    "Basic demographics only",
+                    "I know their problems",
+                    "Deep understanding of their needs",
+                    "They feel like I'm speaking directly to them"
+                ]
+            },
+            {
+                category: "Visual Identity",
+                text: "How consistent is your visual brand presence?",
+                options: [
+                    "No consistent visuals",
+                    "Logo only, everything else varies",
+                    "Some colors/fonts consistent",
+                    "Most touchpoints are aligned",
+                    "Perfect consistency everywhere"
+                ]
+            },
+            {
+                category: "Brand Experience",
+                text: "How would you rate the experience people have with your brand?",
+                options: [
+                    "Inconsistent and confusing",
+                    "Okay but nothing special",
+                    "Generally positive",
+                    "Memorable and enjoyable",
+                    "Exceptional and shareable"
+                ]
+            }
+        ];
+
+        let currentQuestion = 0;
+        let answers = [];
+
+        function displayQuestion() {
+            const container = document.getElementById('questionContainer');
+            const q = questions[currentQuestion];
+            
+            let html = `
+                <div style="margin-bottom: 1rem; color: var(--primary); font-weight: bold;">
+                    ${q.category}
+                </div>
+                <div class="question-text">${currentQuestion + 1}. ${q.text}</div>
+                <div class="options-grid">
+            `;
+            
+            q.options.forEach((option, index) => {
+                const isSelected = answers[currentQuestion] === index;
+                html += `
+                    <div class="option ${isSelected ? 'selected' : ''}" onclick="selectOption(${index})">
+                        ${option}
+                    </div>
+                `;
+            });
+            
+            html += `</div>`;
+            container.innerHTML = html;
+            
+            // Update progress
+            const progress = ((currentQuestion + 1) / questions.length) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+            
+            // Update buttons
+            document.getElementById('prevBtn').disabled = currentQuestion === 0;
+            document.getElementById('nextBtn').textContent = 
+                currentQuestion === questions.length - 1 ? 'See Results' : 'Next';
+        }
+
+        function selectOption(index) {
+            answers[currentQuestion] = index;
+            displayQuestion();
+        }
+
+        function nextQuestion() {
+            if (answers[currentQuestion] === undefined) {
+                alert('Please select an option');
+                return;
+            }
+            
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                displayQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                displayQuestion();
+            }
+        }
+
+        function showResults() {
+            // Calculate score (0-100)
+            const totalScore = answers.reduce((sum, val) => sum + val, 0);
+            const maxScore = (questions.length - 1) * questions.length;
+            const percentage = Math.round((totalScore / maxScore) * 100);
+            
+            // Hide test, show results
+            document.getElementById('testContainer').style.display = 'none';
+            const resultContainer = document.getElementById('resultContainer');
+            resultContainer.classList.add('show');
+            
+            // Update score circle
+            const scoreCircle = document.getElementById('scoreCircle');
+            scoreCircle.textContent = percentage;
+            
+            // Set level and description
+            let level, description;
+            if (percentage < 40) {
+                level = "Brand Seedling";
+                description = "Your brand is just starting. You have great potential but need to build foundational clarity.";
+            } else if (percentage < 60) {
+                level = "Brand in Progress";
+                description = "You have some elements in place but consistency and differentiation need work.";
+            } else if (percentage < 80) {
+                level = "Established Brand";
+                description = "Solid foundation! Focus on refining and amplifying your strengths.";
+            } else {
+                level = "Brand Leader";
+                description = "Exceptional! You're ready to scale and perhaps mentor others.";
+            }
+            
+            document.getElementById('scoreLevel').textContent = level;
+            document.getElementById('scoreDescription').textContent = description;
+            
+            // Animate score circle (simple)
+            let current = 0;
+            const interval = setInterval(() => {
+                if (current <= percentage) {
+                    scoreCircle.textContent = current;
+                    current++;
+                } else {
+                    clearInterval(interval);
+                }
+            }, 20);
+        }
+
+        // Form submission
+        document.getElementById('signupForm')?.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thank you! Check your email for your full report.');
+            window.location.href = 'dashboard.html?welcome=true';
+        });
+
+        // Initialize
+        displayQuestion();
+    </script>
+</body>
+</html>
