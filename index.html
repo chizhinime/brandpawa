@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BrandPawa – Your Brand Growth Partner</title>
+    <!-- Font Awesome for vector icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* CSS Variables for Brand Colors */
+        :root {
+            --primary: #a300f9;
+            --primary-dark: #7a00c4;
+            --background: #1B1E35;
+            --background-light: #252a45;
+            --white: #ffffff;
+            --gray-light: #f5f5f7;
+            --gray: #e6e6e6;
+            --text-dark: #111;
+            --text-light: #f0f0f0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Avenir', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            color: var(--text-dark);
+            line-height: 1.5;
+            background-color: var(--white);
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Coolvetica', 'Avenir', sans-serif;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+
+        /* Coolvetica fallback – if not available, use a similar font */
+        @font-face {
+            font-family: 'Coolvetica';
+            src: local('Arial Black'), local('Helvetica Bold'), local('sans-serif');
+            font-weight: bold;
+            font-style: normal;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 0.85rem 2rem;
+            border-radius: 40px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            border: 2px solid transparent;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(163, 0, 249, 0.3);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+
+        /* Navigation */
+        .navbar {
+            background-color: var(--background);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo a {
+            font-family: 'Agency', 'Coolvetica', sans-serif;
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--white);
+            text-decoration: none;
+        }
+        .logo span {
+            color: var(--primary);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        .nav-menu a:hover {
+            color: var(--primary);
+        }
+
+        .nav-menu .btn {
+            padding: 0.5rem 1.5rem;
+            margin-left: 0.5rem;
+        }
+
+        .hamburger {
+            display: none;
+            font-size: 1.5rem;
+            color: var(--white);
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--background) 0%, #13182e 100%);
+            color: var(--white);
+            padding: 5rem 0;
+        }
+
+        .hero .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-image {
+            background-color: var(--primary);
+            height: 300px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 2rem;
+            text-align: center;
+            background-image: linear-gradient(45deg, var(--primary) 0%, #b300ff 100%);
+        }
+        .hero-image i {
+            font-size: 5rem;
+        }
+
+        /* Social Proof */
+        .social-proof {
+            padding: 3rem 0;
+            background: var(--gray-light);
+            text-align: center;
+        }
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+        .stat-item {
+            font-size: 1.2rem;
+        }
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary);
+            display: block;
+        }
+        .trust-logos {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+            margin: 2rem 0 1rem;
+            opacity: 0.7;
+        }
+        .trust-logos span {
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+
+        /* How It Works */
+        .how-it-works {
+            padding: 5rem 0;
+            background: var(--white);
+        }
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #555;
+            margin-bottom: 3rem;
+        }
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+        .step {
+            text-align: center;
+            padding: 1.5rem;
+        }
+        .step-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+        }
+        .step h3 {
+            margin-bottom: 1rem;
+        }
+
+        /* Features / PAWA */
+        .features {
+            padding: 5rem 0;
+            background: var(--background);
+            color: white;
+        }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        .feature-card {
+            background: rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 2rem 1.5rem;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: transform 0.3s;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255,255,255,0.15);
+        }
+        .feature-card i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        .feature-card h3 {
+            margin-bottom: 1rem;
+        }
+        .feature-card p {
+            opacity: 0.8;
+            font-size: 0.95rem;
+        }
+
+        /* Tools Highlight */
+        .tools {
+            padding: 5rem 0;
+            background: var(--white);
+        }
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        .tool-item {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 20px;
+            background: var(--gray-light);
+            transition: all 0.3s;
+        }
+        .tool-item:hover {
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            background: white;
+        }
+        .tool-item i {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        .tool-item h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Final CTA */
+        .final-cta {
+            background: linear-gradient(135deg, var(--primary), #7700cc);
+            color: white;
+            padding: 5rem 0;
+            text-align: center;
+        }
+        .final-cta h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        .final-cta p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        .final-cta .btn {
+            border-color: white;
+            color: white;
+            margin: 0 0.5rem;
+        }
+        .final-cta .btn-primary {
+            background: white;
+            color: var(--primary);
+            border-color: white;
+        }
+        .final-cta .btn-primary:hover {
+            background: transparent;
+            color: white;
+        }
+        .final-cta .btn-secondary:hover {
+            background: white;
+            color: var(--primary);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--background);
+            color: white;
+            padding: 4rem 0 2rem;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 2fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+        .footer-col p {
+            margin: 1rem 0;
+            opacity: 0.7;
+        }
+        .footer-col h4 {
+            margin-bottom: 1.5rem;
+        }
+        .footer-links {
+            list-style: none;
+        }
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+        .newsletter-form {
+            display: flex;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+        .newsletter-form input {
+            flex: 1;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 30px;
+            outline: none;
+        }
+        .newsletter-form button {
+            background: var(--primary);
+            border: none;
+            color: white;
+            padding: 0 1.5rem;
+            border-radius: 30px;
+            cursor: pointer;
+        }
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        .social-icons a {
+            color: white;
+            font-size: 1.5rem;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+        .social-icons a:hover {
+            opacity: 1;
+            color: var(--primary);
+        }
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #333;
+            opacity: 0.6;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .steps, .features-grid, .tools-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: var(--background);
+                flex-direction: column;
+                padding: 2rem;
+                gap: 1.5rem;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+            }
+            .nav-menu.active {
+                display: flex;
+            }
+            .hamburger {
+                display: block;
+            }
+            .hero .container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .hero-buttons {
+                justify-content: center;
+            }
+            .steps, .features-grid, .tools-grid {
+                grid-template-columns: 1fr;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            .stats {
+                gap: 2rem;
+            }
+            .stat-number {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            .btn {
+                padding: 0.7rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <div class="logo">
+                <a href="#">Brand<span>Pawa</span></a>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Tools</a></li>
+                <li><a href="#">Talent</a></li>
+                <li><a href="#">Learn</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#" class="btn btn-primary">Login</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Build a Brand That Wins</h1>
+                <p>BrandPawa is the brand operating system for founders, creators, and businesses that intend to own attention, earn trust, and scale with precision.</p>
+                <div class="hero-buttons">
+                    <a href="#" class="btn btn-primary">Take the BrandPawa Test</a>
+                    <a href="#" class="btn btn-secondary">Start a Quiz</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <i class="fas fa-chart-line"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Proof -->
+    <section class="social-proof">
+        <div class="container">
+            <div class="stats">
+                <div class="stat-item">
+                    <span class="stat-number">10k+</span>
+                    Brands Analyzed
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">4.9★</span>
+                    User Rating
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">1M+</span>
+                    Insights Generated
+                </div>
+            </div>
+            <div class="trust-logos">
+                <span>Emeka Nobis</span>
+                <span>Jamie Pajoe University</span>
+                <span>Made in Nigeria</span>
+                <span>TEDx</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works">
+        <div class="container">
+            <h2 class="section-title">How It Works</h2>
+            <p class="section-subtitle">Brand growth, systemized — in four simple steps.</p>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-icon"><i class="fas fa-ruler"></i></div>
+                    <h3>1. Measure Strength</h3>
+                    <p>Take the BrandPawa Test to see where your brand really stands today.</p>
+                </div>
+                <div class="step">
+                    <div class="step-icon"><i class="fas fa-palette"></i></div>
+                    <h3>2. Discover Fit</h3>
+                    <p>Quizzes reveal your colors, archetype, platform strategy, and visual style.</p>
+                </div>
+                <div class="step">
+                    <div class="step-icon"><i class="fas fa-search"></i></div>
+                    <h3>3. Identify the Gap</h3>
+                    <p>We show what's working, what's missing, and what's quietly killing growth.</p>
+                </div>
+                <div class="step">
+                    <div class="step-icon"><i class="fas fa-bullseye"></i></div>
+                    <h3>4. Execute with Precision</h3>
+                    <p>Challenges and automation turn insights into real results.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features / PAWA Framework -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">The PAWA Framework</h2>
+            <p class="section-subtitle" style="color: #ccc;">One platform. Everything your brand runs on.</p>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-compass"></i>
+                    <h3>Positioning</h3>
+                    <p>Never blend in. Stand out with clear strategy and unique identity.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-crown"></i>
+                    <h3>Authority</h3>
+                    <p>Be the trusted leader. Shape your brand to win trust, followers, and influence.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-coins"></i>
+                    <h3>Wealth</h3>
+                    <p>Convert visibility into revenue and results.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-broadcast-tower"></i>
+                    <h3>Awareness</h3>
+                    <p>Expand your reach through automated communication.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Tools -->
+    <section class="tools">
+        <div class="container">
+            <h2 class="section-title">Key Tools to Get Started</h2>
+            <p class="section-subtitle">Diagnose, discover, and take action.</p>
+            <div class="tools-grid">
+                <div class="tool-item">
+                    <i class="fas fa-flask"></i>
+                    <h3>BrandPawa Test</h3>
+                    <p>Measure your brand's real strength, positioning and growth readiness.</p>
+                </div>
+                <div class="tool-item">
+                    <i class="fas fa-question-circle"></i>
+                    <h3>Discovery Quizzes</h3>
+                    <p>Color, archetype, social platform — find what fits your brand.</p>
+                </div>
+                <div class="tool-item">
+                    <i class="fas fa-tasks"></i>
+                    <h3>Growth Challenges</h3>
+                    <p>Step-by-step programs for visibility, authority, and revenue.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final Call to Action -->
+    <section class="final-cta">
+        <div class="container">
+            <h2>Stop the Guesswork. Build with Structure.</h2>
+            <p>Your brand already has potential. BrandPawa helps you unlock it.</p>
+            <div>
+                <a href="#" class="btn btn-primary">Take the BrandPawa Test</a>
+                <a href="#" class="btn btn-secondary">Join the BrandPawa Tribe</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="logo" style="margin-bottom: 1rem;">
+                        <a href="#" style="color: white;">Brand<span style="color: var(--primary);">Pawa</span></a>
+                    </div>
+                    <p>The brand operating system for builders who own attention, earn trust, and scale with precision.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-x-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Explore</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Tools</a></li>
+                        <li><a href="#">Talent</a></li>
+                        <li><a href="#">Learn</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Privacy</a></li>
+                        <li><a href="#">Terms</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Stay Updated</h4>
+                    <p>Subscribe for brand growth insights weekly.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Your email" required>
+                        <button type="submit"><i class="fas fa-arrow-right"></i></button>
+                    </form>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2026 BrandPawa. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript for mobile menu toggle -->
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // Close menu when a link is clicked (optional)
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>
