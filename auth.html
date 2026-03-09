@@ -3,15 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up - BrandPawa</title>
+    <title>Sign Up / Login - BrandPawa</title>
+    <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* Reuse same CSS variables */
         :root {
             --primary: #a300f9;
             --primary-dark: #7a00c4;
+            --primary-light: #c44cff;
             --background: #1B1E35;
+            --background-light: #252a45;
             --white: #ffffff;
+            --gray-light: #f5f5f7;
+            --gray: #e6e6e6;
+            --text-dark: #111;
+            --text-light: #f0f0f0;
+            --error: #ff4444;
+            --success: #00C851;
         }
 
         * {
@@ -21,61 +29,92 @@
         }
 
         body {
-            font-family: 'Avenir', sans-serif;
+            font-family: 'Avenir', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             background: linear-gradient(135deg, var(--background) 0%, #0f1222 100%);
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
+            padding: 1rem;
         }
 
-        .auth-container {
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 3rem 2rem;
-            width: 90%;
-            max-width: 450px;
-            border: 1px solid rgba(255,255,255,0.2);
+        .auth-wrapper {
+            width: 100%;
+            max-width: 480px;
         }
 
-        .auth-header {
+        /* Brand Header */
+        .brand-header {
             text-align: center;
             margin-bottom: 2rem;
         }
 
-        .auth-header h1 {
-            color: var(--primary);
-            font-size: 2.5rem;
+        .brand-header .logo {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--white);
+            text-decoration: none;
+            display: inline-block;
             margin-bottom: 0.5rem;
         }
 
-        .auth-header p {
-            color: var(--white);
-            opacity: 0.8;
+        .brand-header .logo span {
+            color: var(--primary);
         }
 
+        .brand-header p {
+            color: var(--gray);
+            font-size: 1.1rem;
+        }
+
+        /* Auth Container */
+        .auth-container {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 2.5rem 2rem;
+            border: 1px solid rgba(255,255,255,0.15);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            width: 100%;
+        }
+
+        /* Tab Buttons */
         .tab-buttons {
             display: flex;
             gap: 1rem;
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
+            background: rgba(0,0,0,0.2);
+            padding: 0.5rem;
+            border-radius: 60px;
         }
 
         .tab-btn {
             flex: 1;
             padding: 1rem;
             background: transparent;
-            border: 2px solid rgba(255,255,255,0.2);
-            color: white;
-            border-radius: 10px;
+            border: none;
+            color: var(--gray);
+            border-radius: 40px;
             cursor: pointer;
             font-weight: 600;
+            font-size: 1rem;
             transition: all 0.3s;
         }
 
         .tab-btn.active {
             background: var(--primary);
-            border-color: var(--primary);
+            color: white;
+            box-shadow: 0 5px 15px rgba(163, 0, 249, 0.4);
+        }
+
+        /* Forms */
+        .auth-form {
+            display: none;
+        }
+
+        .auth-form.active {
+            display: block;
         }
 
         .form-group {
@@ -85,42 +124,121 @@
         .form-group label {
             display: block;
             margin-bottom: 0.5rem;
-            color: white;
+            color: var(--white);
+            font-weight: 500;
+            font-size: 0.95rem;
         }
 
-        .form-group input {
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-wrapper i {
+            position: absolute;
+            left: 1rem;
+            color: var(--primary);
+            font-size: 1.1rem;
+            opacity: 0.7;
+        }
+
+        .input-wrapper input {
             width: 100%;
-            padding: 1rem;
-            border-radius: 8px;
-            border: 1px solid rgba(255,255,255,0.2);
-            background: rgba(255,255,255,0.1);
-            color: white;
+            padding: 1rem 1rem 1rem 3rem;
+            border-radius: 12px;
+            border: 2px solid rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.05);
+            color: var(--white);
             font-size: 1rem;
+            transition: all 0.3s;
         }
 
-        .form-group input:focus {
-            outline: 2px solid var(--primary);
+        .input-wrapper input:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: rgba(255,255,255,0.1);
+            box-shadow: 0 0 0 4px rgba(163, 0, 249, 0.1);
         }
 
+        .input-wrapper input::placeholder {
+            color: rgba(255,255,255,0.4);
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 1rem;
+            color: var(--gray);
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .password-toggle:hover {
+            color: var(--primary);
+        }
+
+        /* Form Options */
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 1rem 0 2rem;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--gray);
+            cursor: pointer;
+        }
+
+        .remember-me input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            accent-color: var(--primary);
+        }
+
+        .forgot-password {
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        .forgot-password:hover {
+            color: var(--primary-light);
+            text-decoration: underline;
+        }
+
+        /* Submit Button */
         .auth-btn {
             width: 100%;
             padding: 1rem;
-            background: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: white;
             border: none;
-            border-radius: 30px;
+            border-radius: 40px;
             font-weight: 600;
+            font-size: 1.1rem;
             cursor: pointer;
-            margin-top: 1rem;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
         }
 
-        .error-message {
-            color: #ff4444;
-            margin-top: 1rem;
-            text-align: center;
+        .auth-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(163, 0, 249, 0.4);
         }
 
-        .loader {
+        .auth-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        .auth-btn .loader {
             display: inline-block;
             width: 20px;
             height: 20px;
@@ -133,73 +251,369 @@
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
-    </style>
-</head>
-<body>
-    <div class="auth-container">
-        <div class="auth-header">
-            <h1>Brand<span style="color: white;">Pawa</span></h1>
-            <p>Your Brand Growth Partner</p>
-        </div>
 
-        <div class="tab-buttons">
-            <button class="tab-btn active" onclick="switchTab('login')" id="loginTab">Login</button>
-            <button class="tab-btn" onclick="switchTab('signup')" id="signupTab">Sign Up</button>
-        </div>
+        /* Divider */
+        .divider {
+            text-align: center;
+            margin: 2rem 0;
+            position: relative;
+        }
 
-        <!-- Login Form -->
-        <form id="loginForm" onsubmit="handleLogin(event)">
-            <div class="form-group">
-                <label>Email</label>
-                <input type="email" id="loginEmail" required>
-            </div>
-            <div class="form-group">
-                <label>Password</label>
-                <input type="password" id="loginPassword" required>
-            </div>
-            <button type="submit" class="auth-btn" id="loginBtn">Login</button>
-            <div id="loginError" class="error-message"></div>
-        </form>
+        .divider::before,
+        .divider::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: calc(50% - 30px);
+            height: 1px;
+            background: rgba(255,255,255,0.2);
+        }
 
-        <!-- Signup Form -->
-        <form id="signupForm" onsubmit="handleSignup(event)" style="display: none;">
-            <div class="form-group">
-                <label>First Name</label>
-                <input type="text" id="signupFirstName" required>
-            </div>
-            <div class="form-group">
-                <label>Last Name</label>
-                <input type="text" id="signupLastName" required>
-            </div>
-            <div class="form-group">
-                <label>Email</label>
-                <input type="email" id="signupEmail" required>
-            </div>
-            <div class="form-group">
-                <label>Password</label>
-                <input type="password" id="signupPassword" required minlength="6">
-            </div>
-            <button type="submit" class="auth-btn" id="signupBtn">Create Account</button>
-            <div id="signupError" class="error-message"></div>
-        </form>
-    </div>
+        .divider::before {
+            left: 0;
+        }
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script>
-        const SUPABASE_URL = 'https://dztgtyfksnagfqugrsse.supabase.co';
-        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR6dGd0eWZrc25hZ2ZxdWdyc3NlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMwODcxNzUsImV4cCI6MjA4ODY2MzE3NX0.UmljeUQNFrTjXCOvvRnLZyyhBV5Y8bcyq7Rj-9NF9qg';
-        const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        .divider::after {
+            right: 0;
+        }
 
-        // Check if user is already logged in
-        checkUser();
+        .divider span {
+            background: rgba(255,255,255,0.05);
+            padding: 0.5rem 1rem;
+            border-radius: 40px;
+            color: var(--gray);
+            font-size: 0.9rem;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
 
-        async function checkUser() {
-            const { data: { user } } = await supabase.auth.getUser();
-            if (user) {
-                window.location.href = '/dashboard.html';
+        /* Social Login */
+        .social-login {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-btn {
+            padding: 0.8rem;
+            border: 2px solid rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            color: var(--white);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .social-btn:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .social-btn i {
+            font-size: 1.2rem;
+        }
+
+        .social-btn.google i { color: #DB4437; }
+        .social-btn.github i { color: #fff; }
+
+        /* Error Message */
+        .error-message {
+            background: rgba(255, 68, 68, 0.1);
+            border: 1px solid var(--error);
+            color: #ff8888;
+            padding: 1rem;
+            border-radius: 12px;
+            margin-top: 1rem;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .error-message i {
+            color: var(--error);
+            font-size: 1.1rem;
+        }
+
+        /* Success Message */
+        .success-message {
+            background: rgba(0, 200, 81, 0.1);
+            border: 1px solid var(--success);
+            color: #88ff88;
+            padding: 1rem;
+            border-radius: 12px;
+            margin-top: 1rem;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Terms Agreement */
+        .terms-agreement {
+            margin: 1.5rem 0;
+            text-align: center;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .terms-agreement a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .terms-agreement a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .auth-container {
+                padding: 2rem 1.5rem;
+            }
+
+            .social-login {
+                grid-template-columns: 1fr;
+            }
+
+            .brand-header .logo {
+                font-size: 2.5rem;
             }
         }
 
+        /* Password Strength Indicator (for signup) */
+        .password-strength {
+            margin-top: 0.5rem;
+            height: 4px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .strength-bar {
+            height: 100%;
+            width: 0%;
+            transition: all 0.3s;
+        }
+
+        .strength-bar.weak { width: 33.33%; background: #ff4444; }
+        .strength-bar.medium { width: 66.66%; background: #ffbb33; }
+        .strength-bar.strong { width: 100%; background: #00C851; }
+
+        .strength-text {
+            font-size: 0.8rem;
+            margin-top: 0.3rem;
+            color: var(--gray);
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-wrapper">
+        <!-- Brand Header -->
+        <div class="brand-header">
+            <a href="index.html" class="logo">Brand<span>Pawa</span></a>
+            <p>Your Brand Growth Partner</p>
+        </div>
+
+        <!-- Main Auth Container -->
+        <div class="auth-container">
+            <!-- Tab Buttons -->
+            <div class="tab-buttons">
+                <button class="tab-btn active" onclick="switchTab('login')" id="loginTab">Login</button>
+                <button class="tab-btn" onclick="switchTab('signup')" id="signupTab">Create Account</button>
+            </div>
+
+            <!-- Login Form -->
+            <form id="loginForm" class="auth-form active" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="loginEmail" placeholder="you@example.com" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Password</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="loginPassword" placeholder="••••••••" required>
+                        <i class="fas fa-eye password-toggle" onclick="togglePassword('loginPassword', this)"></i>
+                    </div>
+                </div>
+
+                <div class="form-options">
+                    <label class="remember-me">
+                        <input type="checkbox" id="rememberMe"> Remember me
+                    </label>
+                    <a href="#" class="forgot-password" onclick="handleForgotPassword(event)">Forgot Password?</a>
+                </div>
+
+                <button type="submit" class="auth-btn" id="loginBtn">
+                    <span class="btn-text">Login to Your Account</span>
+                </button>
+
+                <div id="loginError" class="error-message" style="display: none;">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <span></span>
+                </div>
+
+                <div id="loginSuccess" class="success-message" style="display: none;">
+                    <i class="fas fa-check-circle"></i>
+                    <span></span>
+                </div>
+
+                <div class="divider">
+                    <span>OR CONTINUE WITH</span>
+                </div>
+
+                <div class="social-login">
+                    <button type="button" class="social-btn google" onclick="handleSocialLogin('google')">
+                        <i class="fab fa-google"></i> Google
+                    </button>
+                    <button type="button" class="social-btn github" onclick="handleSocialLogin('github')">
+                        <i class="fab fa-github"></i> GitHub
+                    </button>
+                </div>
+            </form>
+
+            <!-- Signup Form -->
+            <form id="signupForm" class="auth-form" onsubmit="handleSignup(event)">
+                <div class="form-group">
+                    <label>First Name</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="signupFirstName" placeholder="John" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Last Name</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="signupLastName" placeholder="Doe" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="signupEmail" placeholder="you@example.com" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Password</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="signupPassword" placeholder="Create a strong password" required minlength="6" oninput="checkPasswordStrength(this.value)">
+                        <i class="fas fa-eye password-toggle" onclick="togglePassword('signupPassword', this)"></i>
+                    </div>
+                    <div class="password-strength">
+                        <div class="strength-bar" id="strengthBar"></div>
+                    </div>
+                    <div class="strength-text" id="strengthText">Enter a password</div>
+                </div>
+
+                <div class="form-group">
+                    <label>Confirm Password</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="signupConfirmPassword" placeholder="Re-enter password" required>
+                        <i class="fas fa-eye password-toggle" onclick="togglePassword('signupConfirmPassword', this)"></i>
+                    </div>
+                </div>
+
+                <div class="terms-agreement">
+                    By creating an account, you agree to our 
+                    <a href="terms.html" target="_blank">Terms of Service</a> and 
+                    <a href="privacy.html" target="_blank">Privacy Policy</a>
+                </div>
+
+                <button type="submit" class="auth-btn" id="signupBtn">
+                    <span class="btn-text">Create Free Account</span>
+                </button>
+
+                <div id="signupError" class="error-message" style="display: none;">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <span></span>
+                </div>
+
+                <div id="signupSuccess" class="success-message" style="display: none;">
+                    <i class="fas fa-check-circle"></i>
+                    <span></span>
+                </div>
+
+                <div class="divider">
+                    <span>OR SIGN UP WITH</span>
+                </div>
+
+                <div class="social-login">
+                    <button type="button" class="social-btn google" onclick="handleSocialLogin('google')">
+                        <i class="fab fa-google"></i> Google
+                    </button>
+                    <button type="button" class="social-btn github" onclick="handleSocialLogin('github')">
+                        <i class="fab fa-github"></i> GitHub
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Back to Home Link -->
+        <div style="text-align: center; margin-top: 1.5rem;">
+            <a href="index.html" style="color: var(--gray); text-decoration: none; font-size: 0.95rem;">
+                <i class="fas fa-arrow-left"></i> Back to Home
+            </a>
+        </div>
+    </div>
+
+    <!-- Supabase JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        // ==================== CONFIGURATION ====================
+        // IMPORTANT: Replace with your actual Supabase credentials
+        const SUPABASE_URL = 'https://dztgtyfksnagfqugrsse.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR6dGd0eWZrc25hZ2ZxdWdyc3NlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMwODcxNzUsImV4cCI6MjA4ODY2MzE3NX0.UmljeUQNFrTjXCOvvRnLZyyhBV5Y8bcyq7Rj-9NF9qg';
+        
+        // Initialize Supabase client
+        const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+            auth: {
+                autoRefreshToken: true,
+                persistSession: true,
+                detectSessionInUrl: true
+            }
+        });
+
+        // ==================== INITIALIZATION ====================
+        // Check URL parameters for signup tab
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('signup') === 'true') {
+            switchTab('signup');
+        }
+
+        // Check if user is already logged in
+        checkExistingSession();
+
+        async function checkExistingSession() {
+            try {
+                const { data: { session }, error } = await supabase.auth.getSession();
+                if (session) {
+                    // User is logged in, redirect to dashboard
+                    window.location.href = '/dashboard.html';
+                }
+            } catch (error) {
+                console.error('Session check error:', error);
+            }
+        }
+
+        // ==================== TAB SWITCHING ====================
         function switchTab(tab) {
             const loginForm = document.getElementById('loginForm');
             const signupForm = document.getElementById('signupForm');
@@ -207,86 +621,321 @@
             const signupTab = document.getElementById('signupTab');
 
             if (tab === 'login') {
-                loginForm.style.display = 'block';
-                signupForm.style.display = 'none';
+                loginForm.classList.add('active');
+                signupForm.classList.remove('active');
                 loginTab.classList.add('active');
                 signupTab.classList.remove('active');
+                
+                // Update browser URL without reload
+                const url = new URL(window.location);
+                url.searchParams.delete('signup');
+                window.history.pushState({}, '', url);
             } else {
-                loginForm.style.display = 'none';
-                signupForm.style.display = 'block';
+                loginForm.classList.remove('active');
+                signupForm.classList.add('active');
                 loginTab.classList.remove('active');
                 signupTab.classList.add('active');
+                
+                // Update browser URL
+                const url = new URL(window.location);
+                url.searchParams.set('signup', 'true');
+                window.history.pushState({}, '', url);
             }
         }
 
+        // ==================== PASSWORD TOGGLE ====================
+        function togglePassword(inputId, icon) {
+            const input = document.getElementById(inputId);
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                input.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
+
+        // ==================== PASSWORD STRENGTH CHECKER ====================
+        function checkPasswordStrength(password) {
+            const strengthBar = document.getElementById('strengthBar');
+            const strengthText = document.getElementById('strengthText');
+            
+            if (!password) {
+                strengthBar.className = 'strength-bar';
+                strengthText.textContent = 'Enter a password';
+                return;
+            }
+
+            let strength = 0;
+            
+            // Length check
+            if (password.length >= 8) strength++;
+            if (password.length >= 12) strength++;
+            
+            // Character variety checks
+            if (/[a-z]/.test(password) && /[A-Z]/.test(password)) strength++;
+            if (/[0-9]/.test(password)) strength++;
+            if (/[^a-zA-Z0-9]/.test(password)) strength++;
+            
+            // Update UI based on strength
+            strengthBar.className = 'strength-bar';
+            if (strength <= 2) {
+                strengthBar.classList.add('weak');
+                strengthText.textContent = 'Weak password';
+            } else if (strength <= 4) {
+                strengthBar.classList.add('medium');
+                strengthText.textContent = 'Medium password';
+            } else {
+                strengthBar.classList.add('strong');
+                strengthText.textContent = 'Strong password';
+            }
+        }
+
+        // ==================== LOGIN HANDLER ====================
         async function handleLogin(e) {
             e.preventDefault();
             
-            const email = document.getElementById('loginEmail').value;
+            const email = document.getElementById('loginEmail').value.trim();
             const password = document.getElementById('loginPassword').value;
+            const rememberMe = document.getElementById('rememberMe').checked;
+            
             const btn = document.getElementById('loginBtn');
+            const btnText = btn.querySelector('.btn-text');
             const errorDiv = document.getElementById('loginError');
+            const successDiv = document.getElementById('loginSuccess');
 
-            btn.innerHTML = '<span class="loader"></span> Logging in...';
+            // Reset messages
+            errorDiv.style.display = 'none';
+            successDiv.style.display = 'none';
+            
+            // Show loading state
             btn.disabled = true;
-            errorDiv.textContent = '';
+            btnText.innerHTML = '<span class="loader"></span> Logging in...';
 
             try {
+                // Validate inputs
+                if (!email || !password) {
+                    throw new Error('Please enter both email and password');
+                }
+
+                // Attempt login
                 const { data, error } = await supabase.auth.signInWithPassword({
                     email: email,
-                    password: password
+                    password: password,
+                    options: {
+                        shouldCreateUser: false
+                    }
                 });
 
                 if (error) throw error;
 
-                window.location.href = '/dashboard.html';
+                // Set session persistence based on remember me
+                if (rememberMe) {
+                    await supabase.auth.setSession(data.session);
+                }
+
+                // Show success message
+                successDiv.querySelector('span').textContent = 'Login successful! Redirecting...';
+                successDiv.style.display = 'flex';
+                
+                // Redirect to dashboard
+                setTimeout(() => {
+                    window.location.href = '/dashboard.html';
+                }, 1500);
+
             } catch (error) {
-                errorDiv.textContent = error.message;
-                btn.innerHTML = 'Login';
+                console.error('Login error:', error);
+                
+                // Show error message
+                errorDiv.querySelector('span').textContent = error.message || 'Invalid email or password';
+                errorDiv.style.display = 'flex';
+                
+                // Reset button
                 btn.disabled = false;
+                btnText.textContent = 'Login to Your Account';
             }
         }
 
+        // ==================== SIGNUP HANDLER ====================
         async function handleSignup(e) {
             e.preventDefault();
             
-            const firstName = document.getElementById('signupFirstName').value;
-            const lastName = document.getElementById('signupLastName').value;
-            const email = document.getElementById('signupEmail').value;
+            const firstName = document.getElementById('signupFirstName').value.trim();
+            const lastName = document.getElementById('signupLastName').value.trim();
+            const email = document.getElementById('signupEmail').value.trim();
             const password = document.getElementById('signupPassword').value;
+            const confirmPassword = document.getElementById('signupConfirmPassword').value;
+            
             const btn = document.getElementById('signupBtn');
+            const btnText = btn.querySelector('.btn-text');
             const errorDiv = document.getElementById('signupError');
+            const successDiv = document.getElementById('signupSuccess');
 
-            btn.innerHTML = '<span class="loader"></span> Creating account...';
+            // Reset messages
+            errorDiv.style.display = 'none';
+            successDiv.style.display = 'none';
+
+            // Validation
+            if (!firstName || !lastName) {
+                errorDiv.querySelector('span').textContent = 'Please enter your full name';
+                errorDiv.style.display = 'flex';
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                errorDiv.querySelector('span').textContent = 'Passwords do not match';
+                errorDiv.style.display = 'flex';
+                return;
+            }
+
+            if (password.length < 6) {
+                errorDiv.querySelector('span').textContent = 'Password must be at least 6 characters';
+                errorDiv.style.display = 'flex';
+                return;
+            }
+
+            // Show loading state
             btn.disabled = true;
-            errorDiv.textContent = '';
+            btnText.innerHTML = '<span class="loader"></span> Creating account...';
 
             try {
+                // Attempt signup
                 const { data, error } = await supabase.auth.signUp({
                     email: email,
                     password: password,
                     options: {
                         data: {
                             first_name: firstName,
-                            last_name: lastName
-                        }
+                            last_name: lastName,
+                            full_name: `${firstName} ${lastName}`
+                        },
+                        emailRedirectTo: `${window.location.origin}/dashboard.html`
                     }
                 });
 
                 if (error) throw error;
 
-                btn.innerHTML = '✓ Account created! Redirecting...';
-                
-                setTimeout(() => {
-                    window.location.href = '/dashboard.html?welcome=true';
-                }, 1500);
+                // Check if email confirmation is required
+                if (data.user && data.user.identities && data.user.identities.length === 0) {
+                    throw new Error('User already exists');
+                }
+
+                // Show success message
+                successDiv.querySelector('span').textContent = 
+                    data.session ? 'Account created! Redirecting...' : 'Account created! Please check your email to confirm.';
+                successDiv.style.display = 'flex';
+
+                // If auto-confirmed, redirect to dashboard
+                if (data.session) {
+                    setTimeout(() => {
+                        window.location.href = '/dashboard.html';
+                    }, 1500);
+                } else {
+                    // Reset button for email confirmation case
+                    btn.disabled = false;
+                    btnText.textContent = 'Create Free Account';
+                    
+                    // Switch to login tab after 3 seconds
+                    setTimeout(() => {
+                        switchTab('login');
+                    }, 3000);
+                }
 
             } catch (error) {
-                errorDiv.textContent = error.message;
-                btn.innerHTML = 'Create Account';
+                console.error('Signup error:', error);
+                
+                // Show error message
+                errorDiv.querySelector('span').textContent = error.message || 'Error creating account';
+                errorDiv.style.display = 'flex';
+                
+                // Reset button
                 btn.disabled = false;
+                btnText.textContent = 'Create Free Account';
             }
         }
+
+        // ==================== FORGOT PASSWORD ====================
+        async function handleForgotPassword(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('loginEmail').value.trim();
+            
+            if (!email) {
+                alert('Please enter your email address');
+                return;
+            }
+
+            try {
+                const { error } = await supabase.auth.resetPasswordForEmail(email, {
+                    redirectTo: `${window.location.origin}/reset-password.html`,
+                });
+
+                if (error) throw error;
+
+                alert('Password reset link sent! Please check your email.');
+                
+            } catch (error) {
+                console.error('Reset password error:', error);
+                alert('Error sending reset email. Please try again.');
+            }
+        }
+
+        // ==================== SOCIAL LOGIN ====================
+        async function handleSocialLogin(provider) {
+            try {
+                const { error } = await supabase.auth.signInWithOAuth({
+                    provider: provider,
+                    options: {
+                        redirectTo: `${window.location.origin}/dashboard.html`,
+                        scopes: provider === 'google' ? 'profile email' : 'user:email'
+                    }
+                });
+
+                if (error) throw error;
+
+            } catch (error) {
+                console.error(`${provider} login error:`, error);
+                alert(`Error logging in with ${provider}. Please try again.`);
+            }
+        }
+
+        // ==================== AUTO-FILL DEMO CREDENTIALS (for testing) ====================
+        function fillDemoCredentials() {
+            document.getElementById('loginEmail').value = 'demo@brandpawa.com';
+            document.getElementById('loginPassword').value = 'DemoPass123!';
+        }
+
+        // Add demo button (optional - remove in production)
+        const style = document.createElement('style');
+        style.textContent = `
+            .demo-btn {
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                background: rgba(255,255,255,0.1);
+                border: 1px solid var(--primary);
+                color: var(--primary);
+                padding: 0.5rem 1rem;
+                border-radius: 40px;
+                cursor: pointer;
+                font-size: 0.9rem;
+                backdrop-filter: blur(5px);
+                z-index: 1000;
+            }
+            .demo-btn:hover {
+                background: var(--primary);
+                color: white;
+            }
+        `;
+        document.head.appendChild(style);
+
+        const demoBtn = document.createElement('button');
+        demoBtn.className = 'demo-btn';
+        demoBtn.innerHTML = '<i class="fas fa-flask"></i> Fill Demo Credentials';
+        demoBtn.onclick = fillDemoCredentials;
+        document.body.appendChild(demoBtn);
     </script>
 </body>
 </html>
