@@ -39,7 +39,7 @@
             letter-spacing: -0.02em;
         }
 
-        /* Coolvetica fallback – if not available, use a similar font */
+        /* Coolvetica fallback */
         @font-face {
             font-family: 'Coolvetica';
             src: local('Arial Black'), local('Helvetica Bold'), local('sans-serif');
@@ -335,6 +335,11 @@
         .tool-item h3 {
             margin-bottom: 0.5rem;
         }
+        .tool-item .btn-small {
+            margin-top: 1rem;
+            padding: 0.5rem 1.5rem;
+            font-size: 0.9rem;
+        }
 
         /* Final CTA */
         .final-cta {
@@ -353,8 +358,6 @@
             opacity: 0.9;
         }
         .final-cta .btn {
-            border-color: white;
-            color: white;
             margin: 0 0.5rem;
         }
         .final-cta .btn-primary {
@@ -364,6 +367,10 @@
         }
         .final-cta .btn-primary:hover {
             background: transparent;
+            color: white;
+        }
+        .final-cta .btn-secondary {
+            border-color: white;
             color: white;
         }
         .final-cta .btn-secondary:hover {
@@ -512,16 +519,17 @@
     <nav class="navbar">
         <div class="container nav-container">
             <div class="logo">
-                <a href="#">Brand<span>Pawa</span></a>
+                <a href="index.html">Brand<span>Pawa</span></a>
             </div>
             <ul class="nav-menu" id="navMenu">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Tools</a></li>
-                <li><a href="#">Talent</a></li>
-                <li><a href="#">Learn</a></li>
-                <li><a href="#">Blog</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#" class="btn btn-primary">Login</a></li>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#tools">Tools</a></li>
+                <li><a href="talent.html">Talent</a></li>
+                <li><a href="learn.html">Learn</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="auth.html" class="btn btn-primary">Login</a></li>
+                <li><a href="auth.html?signup=true" class="btn btn-secondary">Sign Up</a></li>
             </ul>
             <div class="hamburger" id="hamburger">
                 <i class="fas fa-bars"></i>
@@ -536,8 +544,8 @@
                 <h1>Build a Brand That Wins</h1>
                 <p>BrandPawa is the brand operating system for founders, creators, and businesses that intend to own attention, earn trust, and scale with precision.</p>
                 <div class="hero-buttons">
-                    <a href="#" class="btn btn-primary">Take the BrandPawa Test</a>
-                    <a href="#" class="btn btn-secondary">Start a Quiz</a>
+                    <a href="brand-test.html" class="btn btn-primary">Take the BrandPawa Test</a>
+                    <a href="quizzes.html" class="btn btn-secondary">Start a Quiz</a>
                 </div>
             </div>
             <div class="hero-image">
@@ -633,7 +641,7 @@
     </section>
 
     <!-- Key Tools -->
-    <section class="tools">
+    <section class="tools" id="tools">
         <div class="container">
             <h2 class="section-title">Key Tools to Get Started</h2>
             <p class="section-subtitle">Diagnose, discover, and take action.</p>
@@ -642,16 +650,19 @@
                     <i class="fas fa-flask"></i>
                     <h3>BrandPawa Test</h3>
                     <p>Measure your brand's real strength, positioning and growth readiness.</p>
+                    <a href="brand-test.html" class="btn btn-primary btn-small">Take Test</a>
                 </div>
                 <div class="tool-item">
                     <i class="fas fa-question-circle"></i>
                     <h3>Discovery Quizzes</h3>
                     <p>Color, archetype, social platform — find what fits your brand.</p>
+                    <a href="quizzes.html" class="btn btn-primary btn-small">Start Quiz</a>
                 </div>
                 <div class="tool-item">
                     <i class="fas fa-tasks"></i>
                     <h3>Growth Challenges</h3>
                     <p>Step-by-step programs for visibility, authority, and revenue.</p>
+                    <a href="challenges.html" class="btn btn-primary btn-small">View Challenges</a>
                 </div>
             </div>
         </div>
@@ -663,8 +674,8 @@
             <h2>Stop the Guesswork. Build with Structure.</h2>
             <p>Your brand already has potential. BrandPawa helps you unlock it.</p>
             <div>
-                <a href="#" class="btn btn-primary">Take the BrandPawa Test</a>
-                <a href="#" class="btn btn-secondary">Join the BrandPawa Tribe</a>
+                <a href="brand-test.html" class="btn btn-primary">Take the BrandPawa Test</a>
+                <a href="auth.html?signup=true" class="btn btn-secondary">Join the BrandPawa Tribe</a>
             </div>
         </div>
     </section>
@@ -675,7 +686,7 @@
             <div class="footer-grid">
                 <div class="footer-col">
                     <div class="logo" style="margin-bottom: 1rem;">
-                        <a href="#" style="color: white;">Brand<span style="color: var(--primary);">Pawa</span></a>
+                        <a href="index.html" style="color: white;">Brand<span style="color: var(--primary);">Pawa</span></a>
                     </div>
                     <p>The brand operating system for builders who own attention, earn trust, and scale with precision.</p>
                     <div class="social-icons">
@@ -688,25 +699,27 @@
                 <div class="footer-col">
                     <h4>Explore</h4>
                     <ul class="footer-links">
-                        <li><a href="#">Tools</a></li>
-                        <li><a href="#">Talent</a></li>
-                        <li><a href="#">Learn</a></li>
-                        <li><a href="#">Blog</a></li>
+                        <li><a href="tools.html">Tools</a></li>
+                        <li><a href="quizzes.html">Quizzes</a></li>
+                        <li><a href="challenges.html">Challenges</a></li>
+                        <li><a href="talent.html">Talent</a></li>
+                        <li><a href="learn.html">Learn</a></li>
+                        <li><a href="blog.html">Blog</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
                     <h4>Company</h4>
                     <ul class="footer-links">
-                        <li><a href="#">About</a></li>
-                        <li><a href="#">Contact</a></li>
-                        <li><a href="#">Privacy</a></li>
-                        <li><a href="#">Terms</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="privacy.html">Privacy</a></li>
+                        <li><a href="terms.html">Terms</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
                     <h4>Stay Updated</h4>
                     <p>Subscribe for brand growth insights weekly.</p>
-                    <form class="newsletter-form">
+                    <form class="newsletter-form" id="newsletterForm">
                         <input type="email" placeholder="Your email" required>
                         <button type="submit"><i class="fas fa-arrow-right"></i></button>
                     </form>
@@ -727,12 +740,27 @@
             navMenu.classList.toggle('active');
         });
 
-        // Close menu when a link is clicked (optional)
+        // Close menu when a link is clicked
         document.querySelectorAll('.nav-menu a').forEach(link => {
             link.addEventListener('click', () => {
                 navMenu.classList.remove('active');
             });
         });
+
+        // Newsletter form handler
+        document.getElementById('newsletterForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thanks for subscribing! We\'ll be in touch.');
+            this.reset();
+        });
+
+        // Check URL parameters for signup
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('signup') === 'true') {
+            setTimeout(() => {
+                window.location.href = '/auth.html?signup=true';
+            }, 500);
+        }
     </script>
 </body>
 </html>
