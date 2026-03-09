@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - BrandPawa</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Same CSS variables */
+        :root {
+            --primary: #a300f9;
+            --background: #1B1E35;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Avenir', sans-serif;
+            background: #f5f5f7;
+        }
+
+        .dashboard {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 280px;
+            background: var(--background);
+            color: white;
+            padding: 2rem;
+        }
+
+        .sidebar h2 {
+            color: var(--primary);
+            margin-bottom: 2rem;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+        }
+
+        .sidebar-menu li {
+            margin-bottom: 1rem;
+        }
+
+        .sidebar-menu a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.8rem 1rem;
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+
+        .sidebar-menu a:hover,
+        .sidebar-menu a.active {
+            background: rgba(163, 0, 249, 0.2);
+            color: white;
+        }
+
+        .sidebar-menu i {
+            width: 24px;
+            color: var(--primary);
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            padding: 2rem;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+        }
+
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .logout-btn {
+            background: transparent;
+            border: 2px solid #ddd;
+            padding: 0.5rem 1.5rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .logout-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .stat-card i {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .stat-card h3 {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-card .number {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        /* Recent Quizzes */
+        .quizzes-section {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+        }
+
+        .quiz-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .quiz-item:last-child {
+            border-bottom: none;
+        }
+
+        .quiz-info h4 {
+            margin-bottom: 0.3rem;
+        }
+
+        .quiz-info p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .quiz-badge {
+            background: var(--primary);
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <h2>Brand<span style="color: white;">Pawa</span></h2>
+            <ul class="sidebar-menu">
+                <li><a href="#" class="active"><i class="fas fa-home"></i> Dashboard</a></li>
+                <li><a href="#"><i class="fas fa-chart-line"></i> My Brand</a></li>
+                <li><a href="#"><i class="fas fa-tasks"></i> Challenges</a></li>
+                <li><a href="#"><i class="fas fa-rocket"></i> Automation</a></li>
+                <li><a href="#"><i class="fas fa-users"></i> Talent Network</a></li>
+                <li><a href="#"><i class="fas fa-book"></i> Resources</a></li>
+                <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="header">
+                <h1>Welcome back, <span id="userName">User</span>! 👋</h1>
+                <div class="user-menu">
+                    <div class="user-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <button class="logout-btn" onclick="logout()">Logout</button>
+                </div>
+            </div>
+
+            <!-- Stats -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <i class="fas fa-flask"></i>
+                    <h3>Tests Completed</h3>
+                    <div class="number" id="testsCount">0</div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-tasks"></i>
+                    <h3>Challenges Active</h3>
+                    <div class="number">2</div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-fire"></i>
+                    <h3>Current Streak</h3>
+                    <div class="number">7 days</div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-trophy"></i>
+                    <h3>Brand Score</h3>
+                    <div class="number">78</div>
+                </div>
+            </div>
+
+            <!-- Recent Quizzes -->
+            <div class="quizzes-section">
+                <h2 style="margin-bottom: 1.5rem;">Your Recent Results</h2>
+                <div id="recentQuizzes"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        const SUPABASE_URL = 'https://dztgtyfksnagfqugrsse.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR6dGd0eWZrc25hZ2ZxdWdyc3NlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMwODcxNzUsImV4cCI6MjA4ODY2MzE3NX0.UmljeUQNFrTjXCOvvRnLZyyhBV5Y8bcyq7Rj-9NF9qg';
+        const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        // Check authentication
+        checkAuth();
+
+        async function checkAuth() {
+            const { data: { user } } = await supabase.auth.getUser();
+            
+            if (!user) {
+                window.location.href = '/auth.html';
+                return;
+            }
+
+            // Display user name
+            document.getElementById('userName').textContent = 
+                user.user_metadata?.first_name || 'User';
+
+            // Load user's quiz results
+            loadQuizResults(user.id);
+        }
+
+        async function loadQuizResults(userId) {
+            const { data, error } = await supabase
+                .from('quiz_results')
+                .select('*')
+                .eq('user_id', userId)
+                .order('created_at', { ascending: false })
+                .limit(5);
+
+            if (error) {
+                console.error('Error loading quizzes:', error);
+                return;
+            }
+
+            // Update tests count
+            document.getElementById('testsCount').textContent = data.length;
+
+            // Display recent quizzes
+            const container = document.getElementById('recentQuizzes');
+            
+            if (data.length === 0) {
+                container.innerHTML = '<p style="color: #666;">No quizzes taken yet. <a href="/color-quiz.html" style="color: var(--primary);">Take your first quiz!</a></p>';
+                return;
+            }
+
+            let html = '';
+            data.forEach(quiz => {
+                html += `
+                    <div class="quiz-item">
+                        <div class="quiz-info">
+                            <h4>${quiz.quiz_type === 'color' ? '🎨 Brand Color' : '📊 Brand Test'}</h4>
+                            <p>Result: ${quiz.result} • ${new Date(quiz.created_at).toLocaleDateString()}</p>
+                        </div>
+                        <div class="quiz-badge">View Report</div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
+
+        async function logout() {
+            await supabase.auth.signOut();
+            window.location.href = '/';
+        }
+    </script>
+</body>
+</html>
